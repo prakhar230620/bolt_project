@@ -38,13 +38,25 @@ export interface ProjectSchema {
   id: string;
   title: string;
   description: string;
-  image: string;
+  images: string[];
+  type: 'upcoming' | 'construction' | 'design';
   category: 'residential' | 'commercial' | 'hospitality';
+  location?: string;
+  price?: {
+    min: number;
+    max: number;
+    currency: string;
+  };
   details: {
     floorPlan?: string;
     design3d?: string;
-    pricePerSqFt: number;
+    pricePerSqFt?: number;
+    amenities?: string[];
+    specifications?: {
+      [key: string]: string;
+    };
   };
+  status: 'planning' | 'in-progress' | 'completed';
   createdAt: string;
   updatedAt: string;
 }

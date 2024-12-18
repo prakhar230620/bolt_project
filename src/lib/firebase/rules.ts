@@ -8,12 +8,14 @@ service cloud.firestore {
       return request.auth != null;
     }
     
-    function isOwner(userId) {
-      return request.auth.uid == userId;
-    }
-    
     function isAdmin() {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Projects Collection
+    match /projects/{projectId} {
+      allow read: if true;  // Anyone can read projects
+      allow create, update, delete: if isAuthenticated() && isAdmin();  // Only admin can modify
     }
 
     // Users Collection
@@ -29,12 +31,6 @@ service cloud.firestore {
       allow update: if isAdmin();
     }
 
-    // Projects Collection
-    match /projects/{projectId} {
-      allow read: if true;
-      allow write: if isAdmin();
-    }
-
     // Package Subscriptions Collection
     match /package_subscriptions/{subscriptionId} {
       allow read: if isAuthenticated() && (isOwner(resource.data.userId) || isAdmin());
@@ -47,6 +43,16 @@ service cloud.firestore {
       allow read: if isAdmin();
       allow create: if true;
       allow update: if isAdmin();
+    }
+  }
+}
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /projects/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
     }
   }
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Laptop, ChevronDown, User } from 'lucide-react';
+import { Menu, X, ChevronDown, User } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 
 const Header = () => {
@@ -38,8 +38,12 @@ const Header = () => {
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-2">
-            <Laptop className="h-8 w-8 text-[#1a237e]" />
-            <span className="font-bold text-xl text-[#1a237e]">Next Innovation</span>
+            <img
+              src="/logo.jpeg"
+              alt="Company Logo"
+              className="h-8 w-8 object-contain"
+            />
+            <span className="font-bold text-xl text-[#1a237e]">The Next Innovation Reality</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -212,3 +216,4 @@ const Header = () => {
 };
 
 export default Header;
+

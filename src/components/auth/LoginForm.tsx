@@ -1,8 +1,11 @@
- import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Lock, AlertCircle } from 'lucide-react';
 import Input from '../ui/Input';
 import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
+
+const ADMIN_EMAIL = "admin@nir.com";
+const ADMIN_PASSWORD = "admin123";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -17,11 +20,18 @@ const LoginForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { error } = await signIn(formData.email, formData.password);
-    if (error) {
-      setError('Invalid email or password');
+    if (formData.email === ADMIN_EMAIL && formData.password === ADMIN_PASSWORD) {
+      // Admin login
+      localStorage.setItem('isAdmin', 'true');
+      navigate('/admin/dashboard');
     } else {
-      navigate('/profile');
+      // Regular user login
+      const { error } = await signIn(formData.email, formData.password);
+      if (error) {
+        setError('Invalid email or password');
+      } else {
+        navigate('/profile');
+      }
     }
   };
 

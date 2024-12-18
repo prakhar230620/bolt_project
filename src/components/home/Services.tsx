@@ -4,35 +4,31 @@ import ServiceCard from './ServiceCard';
 
 const services = [
   {
-    title: 'AI Solutions',
+    title: 'NIR Smart Packages',
     description: 'Cutting-edge artificial intelligence solutions to transform your business processes.',
     Icon: Brain,
   },
   {
-    title: 'Innovation Strategy',
+    title: 'NIR Smart Brand Promotion',
     description: 'Strategic planning and implementation of innovative technology solutions.',
     Icon: Rocket,
   },
   {
-    title: 'Cybersecurity',
+    title: 'NIR Smart Finance',
     description: 'Advanced security measures to protect your digital assets and data.',
     Icon: Shield,
   },
   {
-    title: 'Custom Development',
+    title: 'NIR Constructions',
     description: 'Tailored software solutions designed to meet your specific needs.',
     Icon: Code,
   },
   {
-    title: 'Data Analytics',
+    title: 'NIR Designs',
     description: 'Comprehensive data analysis and visualization services.',
     Icon: Database,
   },
-  {
-    title: 'Cloud Solutions',
-    description: 'Scalable cloud infrastructure and migration services.',
-    Icon: Cloud,
-  },
+
 ];
 
 const Services = () => {
